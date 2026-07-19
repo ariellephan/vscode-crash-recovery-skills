@@ -28,6 +28,23 @@ for skill in cleanup-builds vscode-crash-recovery; do
   /usr/bin/grep -q '^  allow_implicit_invocation: false$' "$openai_policy"
 done
 
+for manifest in \
+  "$repo_dir/.claude-plugin/plugin.json" \
+  "$repo_dir/.claude-plugin/marketplace.json" \
+  "$repo_dir/.codex-plugin/plugin.json" \
+  "$repo_dir/.agents/plugins/marketplace.json" \
+  "$repo_dir/skills.sh.json"; do
+  /usr/bin/jq empty "$manifest"
+done
+
+[[ "$(/usr/bin/jq -r '.version' "$repo_dir/.claude-plugin/plugin.json")" == '0.2.0' ]]
+[[ "$(/usr/bin/jq -r '.version' "$repo_dir/.codex-plugin/plugin.json")" == '0.2.0' ]]
+[[ "$(/usr/bin/jq -r '.plugins[0].name' "$repo_dir/.claude-plugin/marketplace.json")" == 'vscode-crash-recovery-skills' ]]
+[[ "$(/usr/bin/jq -r '.plugins[0].name' "$repo_dir/.agents/plugins/marketplace.json")" == 'vscode-crash-recovery-skills' ]]
+[[ "$(/usr/bin/jq -r '.groupings[0].skills | sort | join(",")' "$repo_dir/skills.sh.json")" == 'cleanup-builds,vscode-crash-recovery' ]]
+[[ -s "$repo_dir/PRIVACY.md" ]]
+[[ -s "$repo_dir/TERMS.md" ]]
+
 if /usr/bin/grep -RInE '~/.claude|~/.copilot|CLAUDE_SKILL_DIR|COPILOT_' "$repo_dir/skills"; then
   echo 'harness-specific path or variable found in a portable skill payload' >&2
   exit 1

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://skills.sh/schemas/skills.sh.schema.json",
+  "notGrouped": "bottom",
+  "groupings": [
+    {
+      "title": "VS Code Health",
+      "description": "Manual, safety-first workflows for editor memory pressure and project-scoped build cleanup.",
+      "skills": [
+        "vscode-crash-recovery",
+        "cleanup-builds"
+      ]
+    }
+  ]
+}

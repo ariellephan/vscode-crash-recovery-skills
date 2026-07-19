@@ -1,0 +1,30 @@
+{
+  "name": "vscode-health-skills",
+  "owner": {
+    "name": "Arielle Nguyen"
+  },
+  "description": "Safety-first Agent Skills for VS Code crash recovery and project-scoped build cleanup on macOS.",
+  "plugins": [
+    {
+      "name": "vscode-crash-recovery-skills",
+      "source": ".",
+      "displayName": "VS Code Crash Recovery Skills",
+      "description": "Diagnose VS Code memory pressure and clean idle Gradle daemons without touching other projects or active sessions.",
+      "author": {
+        "name": "Arielle Nguyen"
+      },
+      "homepage": "https://github.com/ariellephan/vscode-crash-recovery-skills",
+      "repository": "https://github.com/ariellephan/vscode-crash-recovery-skills",
+      "license": "MIT",
+      "keywords": [
+        "vscode",
+        "memory-management",
+        "crash-recovery",
+        "gradle",
+        "agent-skills",
+        "macos"
+      ],
+      "category": "development"
+    }
+  ]
+}

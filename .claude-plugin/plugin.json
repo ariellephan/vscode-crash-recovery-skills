@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "vscode-crash-recovery-skills",
+  "displayName": "VS Code Crash Recovery Skills",
+  "version": "0.2.0",
+  "description": "Manual, safety-first workflows for diagnosing VS Code memory pressure and cleaning idle project-scoped Gradle daemons on macOS.",
+  "author": {
+    "name": "Arielle Nguyen",
+    "url": "https://github.com/ariellephan"
+  },
+  "homepage": "https://github.com/ariellephan/vscode-crash-recovery-skills",
+  "repository": "https://github.com/ariellephan/vscode-crash-recovery-skills",
+  "license": "MIT",
+  "keywords": [
+    "vscode",
+    "memory",
+    "crash-recovery",
+    "gradle",
+    "agent-skills",
+    "macos"
+  ],
+  "skills": "./skills/"
+}

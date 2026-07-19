@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.0 - 2026-07-18
+
+- Added Claude and Codex skill-only plugin marketplace manifests.
+- Added skills.sh repository-page metadata and install documentation.
+- Added public privacy and terms pages for marketplace review.
+
 ## 0.1.1 - 2026-07-18
 
 - Made installation and documentation harness-neutral.

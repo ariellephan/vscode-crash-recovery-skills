@@ -4,6 +4,7 @@ Two safety-first, harness-neutral [Agent Skills](https://agentskills.io/) for
 diagnosing and reducing VS Code memory pressure on macOS.
 
 [![Tests](https://github.com/ariellephan/vscode-crash-recovery-skills/actions/workflows/test.yml/badge.svg)](https://github.com/ariellephan/vscode-crash-recovery-skills/actions/workflows/test.yml)
+[![skills.sh](https://skills.sh/b/ariellephan/vscode-crash-recovery-skills)](https://skills.sh/ariellephan/vscode-crash-recovery-skills)
 
 ## Included Skills
 
@@ -86,6 +87,49 @@ and invocation syntax for Copilot, Claude, Codex, Kimi Code, and custom clients.
 
 Start a new chat or reload the intended VS Code window after installation so the
 client refreshes skill discovery.
+
+## Marketplaces And Discovery
+
+### skills.sh
+
+Install or inspect the open-standard skills with:
+
+```bash
+npx skills add ariellephan/vscode-crash-recovery-skills
+```
+
+### Claude Code
+
+This repository is a Claude plugin marketplace:
+
+```bash
+claude plugin marketplace add ariellephan/vscode-crash-recovery-skills
+claude plugin install vscode-crash-recovery-skills@vscode-health-skills
+```
+
+### OpenAI Codex
+
+This repository is also a Codex plugin marketplace:
+
+```bash
+codex plugin marketplace add ariellephan/vscode-crash-recovery-skills
+codex plugin list
+```
+
+The public OpenAI Plugins Directory has a separate human review process. The
+repository includes the required skill-only plugin manifest and public
+[privacy policy](PRIVACY.md) and [terms](TERMS.md) for that submission.
+
+### GitHub Copilot And VS Code
+
+The source repository can be installed directly with Copilot CLI:
+
+```bash
+copilot skill add https://github.com/ariellephan/vscode-crash-recovery-skills
+```
+
+Marketplace review status is tracked in the repository documentation after a
+submission is opened with the Awesome Copilot community catalog.
 
 ## Optional Monitor
 
