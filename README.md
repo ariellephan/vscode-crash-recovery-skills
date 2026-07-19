@@ -122,10 +122,11 @@ repository includes the required skill-only plugin manifest and public
 
 ### GitHub Copilot And VS Code
 
-The source repository can be installed directly with Copilot CLI:
+After cloning the repository, register its complete skills directory with
+Copilot CLI so bundled scripts remain available:
 
 ```bash
-copilot skill add https://github.com/ariellephan/vscode-crash-recovery-skills
+copilot skill add ./vscode-crash-recovery-skills/skills
 ```
 
 Marketplace review status is tracked in the repository documentation after a
