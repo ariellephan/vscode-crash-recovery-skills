@@ -3,6 +3,10 @@
 This repository publishes local macOS maintenance skills. Treat safety and
 privacy as part of the public API.
 
+- Keep skill payloads on the open Agent Skills standard. Use relative resource
+  links and never require a harness-specific environment variable.
+- Keep installer aliases and compatibility documentation grounded in official
+  client discovery paths; preserve an arbitrary custom-directory escape hatch.
 - Never add real project names, user paths, session identifiers, transcripts,
   screenshots, credentials, account data, or generated assets.
 - Never add whole-machine cleanup. Every action must resolve one workspace or

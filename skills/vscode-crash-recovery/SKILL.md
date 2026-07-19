@@ -1,9 +1,11 @@
 ---
 name: vscode-crash-recovery
-description: 'Audit and remediate a slow, frozen, repeatedly reloading, crashing, or high-memory VS Code project window. Use for renderer OOM, extension-host OOM, high swap, oversized local AI histories, generated/build residue, or excessive workspace indexing. Targets one explicit workspace and never touches other windows or production.'
+description: 'Manually audit and remediate one slow, frozen, repeatedly reloading, crashing, or high-memory VS Code project window. Invoke only when the user requests crash or memory recovery. Covers renderer/extension-host OOM, high swap, oversized local AI histories, generated residue, and indexing pressure.'
 argument-hint: 'Absolute workspace path, optionally with the exact window or session ID'
 user-invocable: true
 disable-model-invocation: true
+license: MIT
+compatibility: 'macOS; Bash 3.2+; VS Code CLI recommended for window attribution'
 ---
 
 # VS Code Crash Recovery
@@ -39,10 +41,12 @@ and may recommend this skill, but it never performs remediation.
 
 ## Fast Read-Only Check
 
-Resolve the bundled script relative to this skill and run:
+Resolve [the bundled health check](./scripts/vscode-health-check.sh) relative to
+this `SKILL.md`; never assume the workspace contains a `scripts/` directory.
+Run:
 
 ```bash
-bash scripts/vscode-health-check.sh --no-notify
+/bin/bash <skill-directory>/scripts/vscode-health-check.sh --no-notify
 ```
 
 It reports host pressure, oversized VS Code renderer/plugin processes, and VS
@@ -157,10 +161,10 @@ close/reopen. Never claim memory recovery from disk cleanup alone.
 The companion monitor is detection-only and opt-in:
 
 ```bash
-bash scripts/monitor-control.sh install
-bash scripts/monitor-control.sh status
-bash scripts/monitor-control.sh run
-bash scripts/monitor-control.sh uninstall
+/bin/bash <skill-directory>/scripts/monitor-control.sh install
+/bin/bash <skill-directory>/scripts/monitor-control.sh status
+/bin/bash <skill-directory>/scripts/monitor-control.sh run
+/bin/bash <skill-directory>/scripts/monitor-control.sh uninstall
 ```
 
 It warns when a renderer exceeds 2 GiB, a plugin/extension host exceeds 1.5 GiB,

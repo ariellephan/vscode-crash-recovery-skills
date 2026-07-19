@@ -22,7 +22,16 @@ for skill in cleanup-builds vscode-crash-recovery; do
   [[ "$(/usr/bin/grep -c '^---$' "$manifest")" -ge 2 ]]
   /usr/bin/grep -q "^name: $skill$" "$manifest"
   /usr/bin/grep -q '^description:' "$manifest"
+  /usr/bin/grep -q '^disable-model-invocation: true$' "$manifest"
+  /usr/bin/grep -q '^compatibility:' "$manifest"
+  openai_policy="$repo_dir/skills/$skill/agents/openai.yaml"
+  /usr/bin/grep -q '^  allow_implicit_invocation: false$' "$openai_policy"
 done
+
+if /usr/bin/grep -RInE '~/.claude|~/.copilot|CLAUDE_SKILL_DIR|COPILOT_' "$repo_dir/skills"; then
+  echo 'harness-specific path or variable found in a portable skill payload' >&2
+  exit 1
+fi
 
 user_path='/'"Users"'/'
 workspace_marker='workspace'"Storage"'/[0-9a-f]{32}'
@@ -39,11 +48,35 @@ if /usr/bin/grep -RIn --exclude-dir=.git -- "$global_option" "$repo_dir"; then
   exit 1
 fi
 
-/bin/mkdir -p "$temp/home"
-HOME="$temp/home" /bin/bash "$repo_dir/install.sh" copilot
-[[ -f "$temp/home/.copilot/skills/cleanup-builds/SKILL.md" ]]
-[[ -f "$temp/home/.copilot/skills/vscode-crash-recovery/SKILL.md" ]]
-if HOME="$temp/home" /bin/bash "$repo_dir/install.sh" copilot >/dev/null 2>&1; then
+assert_install() {
+  target=$1
+  expected=$2
+  home="$temp/home-$target"
+  /bin/mkdir -p "$home"
+  HOME="$home" /bin/bash "$repo_dir/install.sh" "$target" >/dev/null
+  [[ -f "$home/$expected/cleanup-builds/SKILL.md" ]]
+  [[ -f "$home/$expected/vscode-crash-recovery/SKILL.md" ]]
+}
+
+assert_install copilot .copilot/skills
+assert_install claude .claude/skills
+assert_install codex .agents/skills
+assert_install generic .agents/skills
+assert_install kimi .kimi/skills
+assert_install kimi-code .kimi-code/skills
+assert_install config-agents .config/agents/skills
+
+custom_dir="$temp/custom-skills"
+HOME="$temp/custom-home" /bin/bash "$repo_dir/install.sh" custom "$custom_dir" >/dev/null
+[[ -f "$custom_dir/cleanup-builds/SKILL.md" ]]
+[[ -f "$custom_dir/vscode-crash-recovery/SKILL.md" ]]
+
+link_dir="$temp/linked-skills"
+HOME="$temp/link-home" /bin/bash "$repo_dir/install.sh" --link custom "$link_dir" >/dev/null
+[[ -L "$link_dir/cleanup-builds" ]]
+[[ -L "$link_dir/vscode-crash-recovery" ]]
+
+if HOME="$temp/home-copilot" /bin/bash "$repo_dir/install.sh" copilot >/dev/null 2>&1; then
   echo 'installer must refuse overwrites' >&2
   exit 1
 fi

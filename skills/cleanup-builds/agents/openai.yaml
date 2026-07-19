@@ -1,0 +1,7 @@
+interface:
+  display_name: "Cleanup Builds"
+  short_description: "Dry-run, project-scoped Gradle daemon cleanup"
+  default_prompt: "Audit idle Gradle daemons for the explicitly provided project. Start with a dry run and never apply without explicit user confirmation."
+
+policy:
+  allow_implicit_invocation: false

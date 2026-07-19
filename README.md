@@ -1,7 +1,7 @@
 # VS Code Crash Recovery Skills
 
-Two safety-first agent skills for diagnosing and reducing VS Code memory pressure
-on macOS.
+Two safety-first, harness-neutral [Agent Skills](https://agentskills.io/) for
+diagnosing and reducing VS Code memory pressure on macOS.
 
 [![Tests](https://github.com/ariellephan/vscode-crash-recovery-skills/actions/workflows/test.yml/badge.svg)](https://github.com/ariellephan/vscode-crash-recovery-skills/actions/workflows/test.yml)
 
@@ -9,8 +9,8 @@ on macOS.
 
 | Skill | Purpose | Invocation |
 | --- | --- | --- |
-| `vscode-crash-recovery` | Metadata-first diagnosis for renderer/extension-host OOM, oversized local chat histories, workspace indexing, and generated residue | Manual only: `/vscode-crash-recovery /absolute/workspace/path` |
-| `cleanup-builds` | Inventory and optionally stop idle Gradle daemons associated with one project | `/cleanup-builds /absolute/project/path` |
+| `vscode-crash-recovery` | Metadata-first diagnosis for renderer/extension-host OOM, oversized local chat histories, workspace indexing, and generated residue | Manual only; selector varies by harness |
+| `cleanup-builds` | Inventory and optionally stop idle Gradle daemons associated with one project | Manual only; dry-run by default |
 
 The crash-recovery skill includes an optional five-minute macOS monitor. The
 monitor only detects and notifies; it never reloads windows, signals processes,
@@ -35,48 +35,68 @@ rewrites transcripts, deletes files, or accesses network services.
 - macOS
 - Bash 3.2 or newer
 - VS Code with the `code` command available for full window attribution
-- Agent Skills support in GitHub Copilot, Claude, or another compatible client
+- An Agent Skills-compatible harness
 
 The scripts use only macOS system tools. There is no package manager, telemetry,
 or network dependency.
 
 ## Install
 
-Clone the repository and choose one personal skills directory:
+Clone the repository. For the broadest compatibility, install to the generic
+Agent Skills directory used by Copilot, Codex, Kimi Code, and other clients:
 
 ```bash
 git clone https://github.com/ariellephan/vscode-crash-recovery-skills.git
 cd vscode-crash-recovery-skills
-bash install.sh copilot
-# or: bash install.sh claude
-# or: bash install.sh agents
+bash install.sh generic
 ```
 
-The installer refuses to overwrite an existing skill. Review and remove or
-rename an older installation yourself before upgrading.
+Claude Code requires its personal directory separately:
+
+```bash
+bash install.sh claude
+```
+
+The installer refuses to overwrite an existing skill. It copies by default; use
+`--link` to keep multiple harness directories synchronized with one stable
+checkout.
 
 Supported destinations:
 
 | Argument | Destination |
 | --- | --- |
+| `generic`, `agents`, or `codex` | `~/.agents/skills/` |
 | `copilot` | `~/.copilot/skills/` |
 | `claude` | `~/.claude/skills/` |
-| `agents` | `~/.agents/skills/` |
-| `all` | All three destinations, after a complete collision preflight |
+| `kimi` | `~/.kimi/skills/` |
+| `kimi-code` | `~/.kimi-code/skills/` for compatible existing clients |
+| `config-agents` | `~/.config/agents/skills/` |
+| `custom /absolute/path` | Any harness-defined Agent Skills directory |
+| `all` | Every named personal destination after complete collision preflight |
+
+Examples:
+
+```bash
+bash install.sh --link generic
+bash install.sh custom /absolute/repository/.agents/skills
+```
+
+See [Harness Compatibility](docs/HARNESS_COMPATIBILITY.md) for official paths
+and invocation syntax for Copilot, Claude, Codex, Kimi Code, and custom clients.
 
 Start a new chat or reload the intended VS Code window after installation so the
 client refreshes skill discovery.
 
 ## Optional Monitor
 
-The monitor is not enabled by the installer. From the installed
-`vscode-crash-recovery` skill directory:
+The monitor is not enabled by the installer. Resolve the skill directory through
+your harness, then run:
 
 ```bash
-bash scripts/monitor-control.sh install
-bash scripts/monitor-control.sh status
-bash scripts/monitor-control.sh run
-bash scripts/monitor-control.sh uninstall
+/bin/bash <skill-directory>/scripts/monitor-control.sh install
+/bin/bash <skill-directory>/scripts/monitor-control.sh status
+/bin/bash <skill-directory>/scripts/monitor-control.sh run
+/bin/bash <skill-directory>/scripts/monitor-control.sh uninstall
 ```
 
 Default warning thresholds:
@@ -91,7 +111,7 @@ Thresholds can be overridden for a one-shot check with environment variables:
 ```bash
 VSCODE_HEALTH_RENDERER_MIB=3072 \
 VSCODE_HEALTH_CHAT_MIB=192 \
-bash scripts/vscode-health-check.sh --no-notify
+/bin/bash <skill-directory>/scripts/vscode-health-check.sh --no-notify
 ```
 
 The monitor reads process metadata, `vm_stat`, `vm.swapusage`, transcript file
@@ -104,13 +124,13 @@ bodies. It stores only the latest local result and a notification digest under
 Dry run:
 
 ```bash
-bash scripts/cleanup.sh --root /absolute/project/path
+/bin/bash <skill-directory>/scripts/cleanup.sh --root /absolute/project/path
 ```
 
 Apply only after confirming that project is idle:
 
 ```bash
-bash scripts/cleanup.sh --root /absolute/project/path --apply
+/bin/bash <skill-directory>/scripts/cleanup.sh --root /absolute/project/path --apply
 ```
 
 A candidate is signaled only if its command still identifies a Gradle daemon,

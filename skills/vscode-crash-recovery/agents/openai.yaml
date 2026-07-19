@@ -1,0 +1,7 @@
+interface:
+  display_name: "VS Code Crash Recovery"
+  short_description: "Safely audit one VS Code workspace for memory pressure"
+  default_prompt: "Audit and remediate VS Code memory pressure for the explicitly provided workspace while preserving other windows, sessions, and projects."
+
+policy:
+  allow_implicit_invocation: false
