@@ -90,6 +90,14 @@ client refreshes skill discovery.
 
 ## Marketplaces And Discovery
 
+| Channel | Status | Link |
+| --- | --- | --- |
+| skills.sh cross-agent index | Live | [Repository page](https://skills.sh/ariellephan/vscode-crash-recovery-skills) |
+| Claude Code marketplace | Live, self-hosted | `ariellephan/vscode-crash-recovery-skills` |
+| Codex marketplace | Live, self-hosted | `ariellephan/vscode-crash-recovery-skills` |
+| Awesome Copilot marketplace | In review | [External plugin #2354](https://github.com/github/awesome-copilot/issues/2354) |
+| OpenAI public Plugins Directory | Submission prepared; verified publisher action required | [Submission packet](docs/OPENAI_PLUGIN_SUBMISSION.md) |
+
 ### skills.sh
 
 Install or inspect the open-standard skills with:
@@ -129,8 +137,8 @@ Copilot CLI so bundled scripts remain available:
 copilot skill add ./vscode-crash-recovery-skills/skills
 ```
 
-Marketplace review status is tracked in the repository documentation after a
-submission is opened with the Awesome Copilot community catalog.
+Marketplace review is tracked in
+[github/awesome-copilot#2354](https://github.com/github/awesome-copilot/issues/2354).
 
 ## Optional Monitor
 
