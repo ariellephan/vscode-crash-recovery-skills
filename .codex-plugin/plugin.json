@@ -1,6 +1,6 @@
 {
   "name": "vscode-crash-recovery-skills",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Manual, safety-first workflows for diagnosing VS Code memory pressure and cleaning idle project-scoped Gradle daemons on macOS.",
   "author": {
     "name": "Arielle Nguyen",

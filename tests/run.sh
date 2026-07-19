@@ -32,13 +32,16 @@ for manifest in \
   "$repo_dir/.claude-plugin/plugin.json" \
   "$repo_dir/.claude-plugin/marketplace.json" \
   "$repo_dir/.codex-plugin/plugin.json" \
+  "$repo_dir/.github/plugin/plugin.json" \
   "$repo_dir/.agents/plugins/marketplace.json" \
   "$repo_dir/skills.sh.json"; do
   /usr/bin/jq empty "$manifest"
 done
 
-[[ "$(/usr/bin/jq -r '.version' "$repo_dir/.claude-plugin/plugin.json")" == '0.2.0' ]]
-[[ "$(/usr/bin/jq -r '.version' "$repo_dir/.codex-plugin/plugin.json")" == '0.2.0' ]]
+[[ "$(/usr/bin/jq -r '.version' "$repo_dir/.claude-plugin/plugin.json")" == '0.2.1' ]]
+[[ "$(/usr/bin/jq -r '.version' "$repo_dir/.codex-plugin/plugin.json")" == '0.2.1' ]]
+[[ "$(/usr/bin/jq -r '.version' "$repo_dir/.github/plugin/plugin.json")" == '0.2.1' ]]
+[[ "$(/usr/bin/jq -r '.name' "$repo_dir/.github/plugin/plugin.json")" == 'vscode-crash-recovery-skills' ]]
 [[ "$(/usr/bin/jq -r '.plugins[0].name' "$repo_dir/.claude-plugin/marketplace.json")" == 'vscode-crash-recovery-skills' ]]
 [[ "$(/usr/bin/jq -r '.plugins[0].name' "$repo_dir/.agents/plugins/marketplace.json")" == 'vscode-crash-recovery-skills' ]]
 [[ "$(/usr/bin/jq -r '.groupings[0].skills | sort | join(",")' "$repo_dir/skills.sh.json")" == 'cleanup-builds,vscode-crash-recovery' ]]

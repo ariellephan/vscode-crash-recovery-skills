@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.1 - 2026-07-18
+
+- Added the `.github/plugin/plugin.json` compatibility manifest required by
+	Awesome Copilot external-plugin quality gates.
+
 ## 0.2.0 - 2026-07-18
 
 - Added Claude and Codex skill-only plugin marketplace manifests.
