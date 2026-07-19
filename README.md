@@ -95,8 +95,26 @@ client refreshes skill discovery.
 | skills.sh cross-agent index | Live | [Repository page](https://skills.sh/ariellephan/vscode-crash-recovery-skills) |
 | Claude Code marketplace | Live, self-hosted | `ariellephan/vscode-crash-recovery-skills` |
 | Codex marketplace | Live, self-hosted | `ariellephan/vscode-crash-recovery-skills` |
-| Awesome Copilot marketplace | In review | [External plugin #2354](https://github.com/github/awesome-copilot/issues/2354) |
+| Awesome Copilot marketplace | Automated gates passed; awaiting maintainer review | [External plugin #2354](https://github.com/github/awesome-copilot/issues/2354) |
 | OpenAI public Plugins Directory | Submission prepared; verified publisher action required | [Submission packet](docs/OPENAI_PLUGIN_SUBMISSION.md) |
+
+### Remaining Publication TODOs
+
+- [ ] Receive Awesome Copilot maintainer approval and verify the plugin appears
+  in its public marketplace. Automated metadata, skill lint, install smoke, and
+  version-match gates have passed in
+  [external plugin #2354](https://github.com/github/awesome-copilot/issues/2354).
+- [ ] Confirm the submitting OpenAI organization grants Apps Management write
+  access and select a verified individual or business Developer Identity.
+- [ ] Prepare and upload a production-ready plugin logo.
+- [ ] Submit the `v0.2.1` skills-only bundle through the
+  [OpenAI plugin portal](https://platform.openai.com/plugins), using the five
+  positive tests, three negative tests, listing copy, and release notes in the
+  [submission packet](docs/OPENAI_PLUGIN_SUBMISSION.md).
+- [ ] Choose the intended OpenAI Plugins Directory countries or regions and
+  personally review the publisher and policy attestations before submission.
+- [ ] After OpenAI approval, explicitly publish the plugin and verify its public
+  Plugins Directory listing before marking that channel live.
 
 ### skills.sh
 
